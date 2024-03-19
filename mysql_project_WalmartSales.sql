@@ -42,13 +42,15 @@ UPDATE sales SET dayname=Dayname(date);
 SELECT date, monthname(date) FROM sales;
 ALTER table sales add monthname varchar(200);
 UPDATE sales SET monthname=MonthName(date);
--------------------------------------------------------------------------------------------------
-------------------- GENERAL QUESTION--------------------------------------
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------- GENERAL QUESTION--------------------------------------------------------
  /**How many unique cities does the data have?**/
  SELECT DISTINCT city FROM sales;
  /**In which city is each branch**/
 SELECT DISTINCT city, branch FROM sales;
-------------------------- PRODUCT-----------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------- PRODUCT QUESTION ANALYSIS-----------------------------------------
 /**How many unique product lines does the data have?**/
 SELECT count(distinct product_line) FROM sales;
 /**What is the most common payment method?**/
@@ -83,6 +85,7 @@ ORDER BY total_count DESC LIMIT 1 ;
 /**What is the average rating of each product line?**/
 SELECT product_line, ROUND(AVG(rating),2) AS average_rating FROM sales GROUP BY product_line
 ORDER BY average_rating DESC;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------- SALES QUESTION ANALYSIS --------------------------------------
 /**Number of sales made in each time of the day per weekday?**/
 SELECT dayname, time_of_day, COUNT(invoice_id) AS total_sales
@@ -95,6 +98,7 @@ SELECT city, ROUND(SUM(tax_pct), 2) AS total_tax_pct FROM sales GROUP BY city OR
 /**Which customer type pays the most VAT?**/
 SELECT customer_type, ROUND(SUM(tax_pct),2) AS total_VAT FROM sales GROUP BY customer_type ORDER BY total_VAT
 DESC LIMIT 1;
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------- CUSTOMER QUESTION ANALYSIS --------------------------------------
 /**How many unique customer types does the data have**/
 SELECT DISTINCT customer_type FROM sales;
