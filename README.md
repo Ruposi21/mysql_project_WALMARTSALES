@@ -64,8 +64,9 @@ Add a new column named day_name that contains the extracted days of the week on 
 Add a new column named month_name that contains the extracted months of the year on which the given transaction took place (Jan, Feb, Mar). Help determine which month of the year has the most sales and profit.
 
 3. Exploratory Data Analysis (EDA)
-
 Conducting exploratory data analysis is essential to address the project's listed questions and objectives.
+
+
 -----------------------------------------------------------------------------------------------------------------------------------
 # Business Questions to Answer
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
