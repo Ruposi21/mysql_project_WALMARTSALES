@@ -42,21 +42,20 @@ UPDATE sales SET dayname=Dayname(date);
 SELECT date, monthname(date) FROM sales;
 ALTER table sales add monthname varchar(200);
 UPDATE sales SET monthname=MonthName(date);
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------- GENERAL QUESTION--------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+------------------- GENERAL QUESTION--------------------------------------
  /**How many unique cities does the data have?**/
  SELECT DISTINCT city FROM sales;
- /**In which city is each branch**/
+ /** In which city is each branch situated**/
 SELECT DISTINCT city, branch FROM sales;
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------- PRODUCT QUESTION ANALYSIS-----------------------------------------
+------------------------- PRODUCT-----------------------------------------
 /**How many unique product lines does the data have?**/
 SELECT count(distinct product_line) FROM sales;
 /**What is the most common payment method?**/
-SELECT payment, count(payment) AS frquency_common_method FROM sales GROUP BY payment;  
+SELECT payment, count(payment) AS frquency_common_method FROM sales GROUP BY payment ORDER BY payment LIMIT 1;  
 /**What is the most selling product line?**/
-SELECT product_line, COUNT(product_line) FROM sales GROUP BY product_line;
+SELECT product_line, COUNT(product_line) AS cnt_pdct_line FROM sales GROUP BY product_line ORDER BY cnt_pdct_line
+DESC LIMIT 1;
 /**What is the total revenue by month?**/
 SELECT monthname, SUM(total) AS revenue_generated_month FROM sales GROUP BY monthname 
 ORDER BY revenue_generated_month DESC ;
@@ -85,7 +84,6 @@ ORDER BY total_count DESC LIMIT 1 ;
 /**What is the average rating of each product line?**/
 SELECT product_line, ROUND(AVG(rating),2) AS average_rating FROM sales GROUP BY product_line
 ORDER BY average_rating DESC;
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------- SALES QUESTION ANALYSIS --------------------------------------
 /**Number of sales made in each time of the day per weekday?**/
 SELECT dayname, time_of_day, COUNT(invoice_id) AS total_sales
@@ -98,7 +96,6 @@ SELECT city, ROUND(SUM(tax_pct), 2) AS total_tax_pct FROM sales GROUP BY city OR
 /**Which customer type pays the most VAT?**/
 SELECT customer_type, ROUND(SUM(tax_pct),2) AS total_VAT FROM sales GROUP BY customer_type ORDER BY total_VAT
 DESC LIMIT 1;
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------- CUSTOMER QUESTION ANALYSIS --------------------------------------
 /**How many unique customer types does the data have**/
 SELECT DISTINCT customer_type FROM sales;
@@ -106,8 +103,6 @@ SELECT DISTINCT customer_type FROM sales;
 SELECT DISTINCT payment FROM sales;
 /**Which is the most common customer type?**/
 SELECT customer_type, COUNT(customer_type) AS cnt FROM sales GROUP BY customer_type ORDER BY cnt DESC LIMIT 1;
-/**Which customer type buys the most?**/
-SELECT customer_type, count(*) AS cnt FROM sales GROUP BY customer_type;
 /**What is the gender of most of the customers?**/
 SELECT gender, COUNT(gender) AS gender_cnt FROM sales GROUP BY gender;
 /**What is the gender distribution per branch?**/
